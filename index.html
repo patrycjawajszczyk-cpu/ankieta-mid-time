@@ -216,7 +216,24 @@ function star(id,v){var s=document.querySelectorAll('#'+id+' .star');s.forEach(f
 function pick(id,el){document.querySelectorAll('#'+id+' .opt').forEach(function(x){x.classList.remove('on')});el.classList.add('on');V[id]=el.textContent.trim();upd()}
 function sc(id,el){document.querySelectorAll('#'+id+' .sc').forEach(function(x){x.classList.remove('on')});el.classList.add('on');V[id]=el.textContent.trim();upd()}
 function upd(){var req=['qk','qm','qp','s1','s2','s3','q4','q5','q6','q9'];var tr=['q7','q8'];var f=0,t=req.length+tr.length;req.forEach(function(k){if(V[k])f++});tr.forEach(function(k){if(document.getElementById(k)&&document.getElementById(k).value.trim())f++});document.getElementById('prog').style.width=Math.round(f/t*100)+'%'}
-function sub(){var req=['qk','qm','qp','s1','s2','s3','q4','q5','q6','q9'];var ok=true;req.forEach(function(k){if(!V[k])ok=false});if(!document.getElementById('q7').value.trim()||!document.getElementById('q8').value.trim())ok=false;var a=document.getElementById('alert');if(!ok){a.style.display='block';a.scrollIntoView({behavior:'smooth',block:'center'});return}a.style.display='none';document.getElementById('prog').style.width='100%';document.getElementById('form').style.display='none';document.getElementById('thanks').style.display='block';window.scrollTo({top:0,behavior:'smooth'})}
+function sub(){var req=['qk','qm','qp','s1','s2','s3','q4','q5','q6','q9'];var ok=true;req.forEach(function(k){if(!V[k])ok=false});if(!document.getElementById('q7').value.trim()||!document.getElementById('q8').value.trim())ok=false;var a=document.getElementById('alert');if(!ok){a.style.display='block';a.scrollIntoView({behavior:'smooth',block:'center'});return}a.style.display='none';document.getElementById('prog').style.width='100%';fetch('https://script.google.com/macros/s/AKfycbxDW_E1pnzrokz2zeqbNvK-Ed_k5PfcHyFNagChjPHBOKVOaHa6Nf6UgOvzcIOvXKz5IQ/exec', {
+  method: 'POST',
+  body: JSON.stringify({
+    kurs: V['qk'] || '',
+    miasto: V['qm'] || '',
+    prowadzacy: V['qp'] || '',
+    s1: V['s1'] || '',
+    s2: V['s2'] || '',
+    s3: V['s3'] || '',
+    tempo: V['q4'] || '',
+    zakres: V['q5'] || '',
+    organizacja: V['q6'] || '',
+    podobalo: document.getElementById('q7').value,
+    zmienic: document.getElementById('q8').value,
+    polecenie: V['q9'] || '',
+    uwagi: document.getElementById('q10').value
+  })
+}).catch(function(){});document.getElementById('form').style.display='none';document.getElementById('thanks').style.display='block';window.scrollTo({top:0,behavior:'smooth'})}
 </script>
 </body>
 </html>
